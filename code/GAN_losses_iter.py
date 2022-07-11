@@ -56,7 +56,7 @@ parser.add_argument('--grad_penalty', type='bool', default=False, help='If True,
 parser.add_argument('--arch', type=int, default=0, help='1: standard CNN  for 32x32 images from the Spectral GAN paper, 0:DCGAN with number of layers adjusted based on image size. Some options may be ignored by some architectures.')
 parser.add_argument('--print_every', type=int, default=1000, help='Generate a mini-batch of images at every x iterations (to see how the training progress, you can do it often).')
 parser.add_argument('--save', type='bool', default=True, help='Do we save models, yes or no? It will be saved in extra_folder')
-parser.add_argument('--CIFAR10', type='bool', default=False, help='If True, use CIFAR-10 instead of your own dataset. Make sure image_size is set to 32!')
+parser.add_argument('--CIFAR10', type='bool', default=True, help='If True, use CIFAR-10 instead of your own dataset. Make sure image_size is set to 32!')
 parser.add_argument('--CIFAR10_input_folder', default='./CIFAR10', help='input folder (automatically downloaded)')
 #parser.add_argument('--CIFAR10_input_folder_images', default='/home/alexia/Datasets/CIFAR10_images', help='input folder (to download on http://pjreddie.com/media/files/cifar.tgz and extract)')
 param = parser.parse_args()
@@ -166,10 +166,10 @@ trans = transf.Compose([
 ])
 
 ## Importing dataset
-data = dset.ImageFolder(root=param.input_folder, transform=trans)
 if param.CIFAR10:
 	data = dset.CIFAR10(root=param.CIFAR10_input_folder, train=True, download=True, transform=trans)
-
+else:
+	data = dset.ImageFolder(root=param.input_folder, transform=trans)
 # Loading data randomly
 def generate_random_sample():
 	while True:
