@@ -32,9 +32,9 @@ parser.add_argument('--decay', type=float, default=0, help='Decay to apply to lr
 parser.add_argument('--SELU', type='bool', default=False, help='Using scaled exponential linear units (SELU) which are self-normalizing instead of ReLU with BatchNorm. Used only in arch=0. This improves stability.')
 parser.add_argument("--NN_conv", type='bool', default=False, help="This approach minimize checkerboard artifacts during training. Used only by arch=0. Uses nearest-neighbor resized convolutions instead of strided convolutions (https://distill.pub/2016/deconv-checkerboard/ and github.com/abhiskk/fast-neural-style).")
 parser.add_argument('--seed', type=int)
-parser.add_argument('--input_folder', default='/home/alexia/Datasets/Meow_64x64', help='input folder')
-parser.add_argument('--output_folder', default='/home/alexia/Dropbox/Ubuntu_ML/Output/GANlosses', help='output folder')
-parser.add_argument('--inception_folder', default='/home/alexia/Inception', help='Inception model folder (path must exists already, model will be downloaded automatically)')
+parser.add_argument('--input_folder', default="/media/hgoel/Files_SSD/Datasets/Gelbooru_Dec2019_v5_Flat_p/Gelbooru", help='input folder')
+parser.add_argument('--output_folder', default='../logs', help='output folder')
+parser.add_argument('--inception_folder', default='../inception', help='Inception model folder (path must exists already, model will be downloaded automatically)')
 parser.add_argument('--load', default=None, help='Full path to network state to load (ex: /home/output_folder/run-5/models/state_11.pth)')
 parser.add_argument('--cuda', type='bool', default=True, help='enables cuda')
 parser.add_argument('--n_gpu', type=int, default=1, help='number of GPUs to use')
@@ -47,7 +47,7 @@ parser.add_argument('--spectral_G', type='bool', default=False, help='If True, u
 parser.add_argument('--weight_decay', type=float, default=0, help='L2 regularization weight. Helps convergence but leads to artifacts in images, not recommended.')
 parser.add_argument('--gen_extra_images', type=int, default=50000, help='Generate additional images with random fake cats in calculating FID (Recommended to use the same amount as the size of the dataset; for CIFAR-10 we use 50k, but most people use 10k) It must be a multiple of 100.')
 parser.add_argument('--gen_every', type=int, default=100000, help='Generate additional images with random fake cats every x iterations. Used in calculating FID.')
-parser.add_argument('--extra_folder', default='/home/alexia/Output/Extra', help='Folder for extra photos (different so that my dropbox does not get overwhelmed with 50k pictures)')
+parser.add_argument('--extra_folder', default='../extra', help='Folder for extra photos (different so that my dropbox does not get overwhelmed with 50k pictures)')
 parser.add_argument('--show_graph', type='bool', default=False, help='If True, show gradients graph. Really neat for debugging.')
 parser.add_argument('--no_batch_norm_G', type='bool', default=False, help='If True, no batch norm in G.')
 parser.add_argument('--no_batch_norm_D', type='bool', default=False, help='If True, no batch norm in D.')
@@ -57,7 +57,7 @@ parser.add_argument('--arch', type=int, default=0, help='1: standard CNN  for 32
 parser.add_argument('--print_every', type=int, default=1000, help='Generate a mini-batch of images at every x iterations (to see how the training progress, you can do it often).')
 parser.add_argument('--save', type='bool', default=True, help='Do we save models, yes or no? It will be saved in extra_folder')
 parser.add_argument('--CIFAR10', type='bool', default=False, help='If True, use CIFAR-10 instead of your own dataset. Make sure image_size is set to 32!')
-parser.add_argument('--CIFAR10_input_folder', default='/home/alexia/Datasets/CIFAR10', help='input folder (automatically downloaded)')
+parser.add_argument('--CIFAR10_input_folder', default='./CIFAR10', help='input folder (automatically downloaded)')
 #parser.add_argument('--CIFAR10_input_folder_images', default='/home/alexia/Datasets/CIFAR10_images', help='input folder (to download on http://pjreddie.com/media/files/cifar.tgz and extract)')
 param = parser.parse_args()
 
@@ -140,7 +140,7 @@ import math
 
 torch.utils.backcompat.broadcast_warning.enabled=True
 
-from fid import calculate_fid_given_paths as calc_fid
+#from fid import calculate_fid_given_paths as calc_fid
 #from inception import get_inception_score
 #from inception import load_images
 
